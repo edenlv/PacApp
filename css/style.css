@@ -1,0 +1,233 @@
+.pacBG {
+    background: url('../img/pacmanBG.jpg');
+    background-repeat: no-repeat;
+    display: block;
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+    box-sizing: border-box;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    opacity: 0.8;
+}
+
+.shell {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    box-sizing: border-box;
+}
+.GlobalOuterBackground {
+    background: linear-gradient(to bottom,#a9c4df,#e7ecf0);
+}
+
+.Body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    font-size: 1rem;
+}
+
+body {
+    margin: 0px;
+}
+
+@media (min-width: 1280px){
+    .shellCentralBox {
+    width: 1280px;
+    margin-left: -640px;
+    left: 50%;
+    background-color: rgba(255,255,255,0.3);
+    }
+}
+.shellCentralBox {
+    box-shadow: 0 0 24px rgba(0,0,0,0.15);
+    position: relative;
+    height: 100%;
+}
+
+.shellContent {
+    box-sizing: border-box;
+    height: 100%!important;
+    width: 100%;
+    position: relative;
+    margin: 0 auto;
+}
+.shellContentBG {
+    background-color: #fafafa;
+}
+
+.masterVisible {
+    transform: translate3d(0,0,0)!important;
+    transition: all 300ms!important;
+    -webkit-transform: translate3d(0,0,0)!important;
+    -webkit-transition: all 300ms!important;
+}
+
+.masterHidden {
+    transform: translate3d(-330px,0,0)!important;
+    transition: all 300ms!important;
+    -webkit-transform: translate3d(-330px,0,0) !important;
+    -webkit-transition: all 300ms!important;
+    box-shadow: 0 0.625rem 1.875rem 0 rgba(0,0,0,0.15), 0 0 0 1px rgba(0,0,0,0.15);
+    visibility: hidden;
+}
+
+.masterPage {
+    display: inline-block;
+    position: absolute!important;
+    transform: translate3d(-330px,0,0);
+    transition: all 0ms;
+    -webkit-transform: translate3d(-330px,0,0);
+    -webkit-transition: all 0ms;
+    z-index: 5;
+    top: 0;
+    height: 100%;
+    box-shadow: 0 0.625rem 1.875rem 0 rgba(0,0,0,0.15), 0 0 0 1px rgba(0,0,0,0.15);
+    border-right: #ebebeb;
+    background-clip: padding-box;
+    -webkit-background-clip: padding-box;
+    -ms-background-clip: padding-box;
+    box-sizing: border-box;
+    width: 320px;
+    float: left;
+    left: 0;
+    background-color: #ffffff;
+    border-right: 1px solid #ebebeb;
+}
+
+.masterPage,.detailPage {
+    overflow: hidden;
+    position: relative;
+    height: 100%;
+}
+
+.splitApp {
+    width: 100%;
+    height: 100%;
+    display: block;
+    position: relative;
+    overflow: hidden;
+
+}
+
+.detailPage {
+    box-sizing: border-box;
+    height: 100%;
+    touch-action: pan-y;
+}
+
+.bar{
+    display: block;
+    width: 100%;
+    position: relative;
+    height: 3rem;
+    line-height: 3rem;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+header{
+    z-index: 1;
+}
+
+.barMiddle {
+    display: block;
+    text-align: center;
+    width: 100%;
+    height: 0;
+    top: 0;
+    left: 0;
+}
+
+.barRight{
+    text-align:right;
+}
+
+.barLeft{
+    text-align:left;
+}
+
+.navItemContent {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-flex: 1;
+    flex: auto;
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    max-width:100%;
+}
+
+.navItem {
+    display: flex;
+    height: 3rem;
+    -webkit-box-align: center;
+    align-items: center;
+    position: relative;
+    background: #ffffff;
+    border-bottom: 1px solid #e5e5e5;
+    padding: 0 1rem 0 1rem;
+    cursor: pointer;
+}
+.navItem:active{
+    background: #427cac!important;
+}
+.navItem:hover{
+    background: #f0f0f0;
+}
+
+.navItem:active *{
+    color:white!important;
+}
+
+.pageSection{
+    top: 3rem;
+}
+
+.transparentBG{
+    background: transparent;
+}
+
+.outerBtn:active{
+    background: #427cac!important;
+}
+
+.outerBtn:active>.btn{
+    color:white!important;
+}
+
+.outerBtn:hover{
+    background: #f0f0f0;
+}
+
+.outerBtn{
+    border-radius: 0.2rem;
+}
+
+/* page sliding animation */
+.detailPage {
+    transition-duration: 0.3s;
+}
+
+.detailPage.slidingRight {
+    transform: translate3d(100%, 0px, 0px);
+    transition-property: transform;
+}
+
+.detailPage.slidingLeft {
+    transition-property: transform;
+    transform: translate3d(-100%, 0px, 0px);
+}
+
+.detailPage.slidingCenter{
+    transition-property: transform;
+	transform: translate3d(0px, 0px, 0px);
+}
+
+.hidden{
+    display: none!important;
+}

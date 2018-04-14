@@ -1,0 +1,116 @@
+<html>
+
+<head>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+	 crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+	 crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+	 crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	 crossorigin="anonymous">
+	<link rel="stylesheet" href="css/style.css">
+	<script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+"
+	 crossorigin="anonymous"></script>
+	<script src="controller/main.js"></script>
+</head>
+
+<body>
+	<div class="Body">
+		<div class="shell GlobalOuterBackground">
+			<div class="shellCentralBox">
+				<div class="shellContent shellContentBG">
+					<div id="splitApp" class="splitApp">
+
+						<div id="masterPage" class="masterPage masterHidden">
+							<header>
+								<div class="bar">
+									<div class="barMiddle">
+										<span style="text-align:center;">Navigation Pane</span>
+									</div>
+									<div class="barRight">
+										<div class="outerBtn" style="cursor:pointer;display:inline-block;margin-right:0.25rem;margin-left:0.25rem;">
+											<div class="btn btn-primary" onclick="toggleMaster(event)" style="color:#346187;background:transparent;border:none;">
+												<span class="fas fa-2x fa-angle-left"></span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</header>
+							<section class="pageSection">
+								<ul style="padding:0px;">
+									<li id="nav_welcome" class="navItem outerBtn" onclick="onMasterNavigate(event)" data-target="welcome">
+										<div class="navItemContent">
+											Welcome Page
+										</div>
+										<span class="fas fa-chevron-right"></span>
+									</li>
+									<li id="nav_login" class="navItem outerBtn" onclick="onMasterNavigate(event)" data-target="login">
+										<div class="navItemContent">
+											Login
+										</div>
+										<span class="fas fa-chevron-right"></span>
+									</li>
+									<li id="nav_register" class="navItem outerBtn" onclick="onMasterNavigate(event)" data-target="register">
+										<div class="navItemContent">
+											Register
+										</div>
+										<span class="fas fa-chevron-right"></span>
+									</li>
+									<li id="nav_play" class="navItem outerBtn" onclick="onMasterNavigate(event)" data-target="play">
+										<div class="navItemContent">
+											Play Pacman!
+										</div>
+										<span class="fas fa-chevron-right"></span>
+									</li>
+									<li id="nav_about" class="navItem outerBtn">
+										<div class="navItemContent">
+											About
+										</div>
+									</li>
+								</ul>
+							</section>
+						</div>
+
+						<div id="welcome" class="detailPage">
+							<header>
+								<div class="bar">
+									<div class="barMiddle">
+										<span style="text-align:center;">Welcome to the Pacman App!</span>
+									</div>
+									<div class="barLeft">
+										<div class="outerBtn" style="cursor:pointer;display:inline-block;margin-right:0.25rem;margin-left:0.25rem;">
+											<div class="btn btn-primary" onclick="toggleMaster(event)" style="color:#346187;background:transparent;border:none;">
+												<span class="fas fa-2x fa-list"></span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</header>
+						</div>
+
+						<div id="register" class="detailPage">
+							<header>
+								<div class="bar">
+									<div class="barMiddle">
+										<span style="text-align:center;">Register Page</span>
+									</div>
+									<div class="barLeft">
+										<div class="outerBtn" style="cursor:pointer;display:inline-block;margin-right:0.25rem;margin-left:0.25rem;">
+											<div class="btn btn-primary" onclick="toggleMaster(event)" style="color:#346187;background:transparent;border:none;">
+												<span class="fas fa-2x fa-list"></span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</header>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>
