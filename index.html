@@ -1,6 +1,9 @@
 <html>
 
 <head>
+	<script>
+		FontAwesomeConfig = { searchPseudoElements: true };
+	</script>
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
 	 crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
@@ -12,6 +15,10 @@
 	<link rel="stylesheet" href="css/style.css">
 	<script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+"
 	 crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.0/moment.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
 	<script src="controller/main.js"></script>
 </head>
 
@@ -26,7 +33,7 @@
 							<header>
 								<div class="bar">
 									<div class="barMiddle">
-										<span style="text-align:center;">Navigation Pane</span>
+										<h5 class="detailPageTitle">Navigation Pane</h5>
 									</div>
 									<div class="barRight">
 										<div class="outerBtn" style="cursor:pointer;display:inline-block;margin-right:0.25rem;margin-left:0.25rem;">
@@ -76,7 +83,7 @@
 							<header>
 								<div class="bar">
 									<div class="barMiddle">
-										<span style="text-align:center;">Welcome to the Pacman App!</span>
+										<h4 class="detailPageTitle">Welcome to the Pacman App!</h4>
 									</div>
 									<div class="barLeft">
 										<div class="outerBtn" style="cursor:pointer;display:inline-block;margin-right:0.25rem;margin-left:0.25rem;">
@@ -93,7 +100,7 @@
 							<header>
 								<div class="bar">
 									<div class="barMiddle">
-										<span style="text-align:center;">Register Page</span>
+										<h4 class="detailPageTitle">Register Page</h4>
 									</div>
 									<div class="barLeft">
 										<div class="outerBtn" style="cursor:pointer;display:inline-block;margin-right:0.25rem;margin-left:0.25rem;">
@@ -104,6 +111,57 @@
 									</div>
 								</div>
 							</header>
+
+							<section>
+								<div class="p-5">
+									<form id="form_register">
+										<formelements>
+										<div class="form-group row justify-content-center">
+											<label for="inputUsername" class="col-sm-2 col-form-label">Username</label>
+											<div class="inputContainer col-sm-4">
+												<input name="username" type="text" class="form-control" id="inputUsername" placeholder="Username"></input>
+											</div>
+										</div>
+
+										<div class="form-group row justify-content-center">
+											<label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+											<div class="inputContainer col-sm-4">
+												<input name="password" type="password" class="form-control" id="inputPassword" placeholder="Password">
+											</div>
+										</div>
+										<div class="form-group row justify-content-center">
+											<label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
+											<div class="inputContainer col-sm-4">
+												<input name="email" type="email" class="form-control" id="inputEmail" placeholder="Email">
+											</div>
+										</div>
+										<div class="form-group row justify-content-center">
+											<label for="inputFirstname" class="col-sm-2 col-form-label">First Name</label>
+											<div class="inputContainer col-sm-4">
+												<input name="firstname" type="text" class="form-control" id="inputFirstname" placeholder="First Name">
+											</div>
+										</div>
+										<div class="form-group row justify-content-center">
+											<label for="inputLastname" class="col-sm-2 col-form-label">Last Name</label>
+											<div class="inputContainer col-sm-4">
+												<input name="lastname" type="text" class="form-control" id="inputLastname" placeholder="Last Name">
+											</div>
+										</div>
+										<div class="form-group row justify-content-center">
+											<label for="" class="col-sm-2 col-form-label">Date of Birth</label>
+											<div class="inputContainer col-sm-4">
+												<input name="birthday" id="dt" data-provide="datepicker" class="form-control">
+											</div>
+										</div>
+										</formelements>
+
+										<div class="form-group row justify-content-center" style="margin-top:2.25rem;">
+											<button type="submit" class="btn btn-primary mb-2 btn-lg col-sm-6">Register!</button>
+										</div>
+									</form>
+
+								</div>
+							</section>
 						</div>
 
 					</div>

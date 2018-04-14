@@ -8,12 +8,23 @@ $(() => {
     //set welcome page as default - trigger click event on welcome navbutton
     $('#nav_welcome').trigger($.Event('onclick'));
 
+    //click outside of master page will trigger close
     $('.detailPage').bind('mouseup',
         (oEvent)=>{
             if ( $('.masterPage').hasClass('masterVisible') )
                 window.toggleMaster(oEvent);
         }
     );
+
+    //init datepicker control in register form
+    $('#dt').datepicker({
+        format: 'dd/mm/yyyy',
+         autoclose: true,
+         locale: 'he'
+    });
+
+    //register form validator
+    initFormValidator();
 });
 
 function toggleMaster(oEvent) {
@@ -53,5 +64,33 @@ function onMasterNavigate(oEvent, aParams) {
 }
 
 function onTransitionEndDetail(oEvent) {
-    console.log("transition ended");
+    if ( $(oEvent.target).hasClass('detailPage') > 0 ){
+        console.log("transition of detail page ended");
+    }
+}
+
+function initFormValidator(){
+    $('#form_register').validate({
+        rules: {
+            username: {
+                minlength: 2,
+                required: true
+            },
+            password: {
+                required: true,
+                minlength: 8
+            },
+            email: {
+                required: true,
+                email: true
+            },
+        },
+        highlight: function (element) {
+            console.log("highlighting");
+            console.log(element);
+        },
+        success: function (element) {
+            element.parent().addClass('valid');
+        }
+    });
 }

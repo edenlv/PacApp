@@ -231,3 +231,40 @@ header{
 .hidden{
     display: none!important;
 }
+
+.detailPageTitle{
+    line-height:3rem;
+    height:3rem;
+    text-align:center;
+}
+
+.error{
+    color: red;
+}
+
+.inputContainer.valid::after{ 
+    display:none;
+    content: '\f00c';
+    font-family: "Font Awesome 5 Solid";
+    font-weight: normal;
+    font-style: normal;
+    text-decoration:none;
+ } 
+
+ .inputContainer {
+     display:-webkit-box;
+ }
+
+ .inputContainer .fa-check {
+     color:green;
+     margin-top: 8px;
+     margin-left: 10px;
+ }
+
+ input.valid{
+    color: #495057;
+    background-color: #fff;
+    border-color: green;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem #a5d4a5;
+ }
