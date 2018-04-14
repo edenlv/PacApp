@@ -2,10 +2,18 @@ var currentDetail;
 
 $(() => {
 
-    // $('.detailPage').bind("webkitTransitionEnd transitionend", //only works for display !== none
-    //     onTransitionEndDetail);
+    $('.detailPage').bind("transitionend", //only works for display !== none
+        onTransitionEndDetail);
 
-    // $('#nav_welcome').trigger($.Event('onclick'));
+    //set welcome page as default - trigger click event on welcome navbutton
+    $('#nav_welcome').trigger($.Event('onclick'));
+
+    $('.detailPage').bind('mouseup',
+        (oEvent)=>{
+            if ( $('.masterPage').hasClass('masterVisible') )
+                window.toggleMaster(oEvent);
+        }
+    );
 });
 
 function toggleMaster(oEvent) {
@@ -17,50 +25,33 @@ function toggleMaster(oEvent) {
     }
 }
 
-function onClickOutsideMaster(oEvent) {
-    window.toggleMaster(oEvent);
-    $('.detailPage').unbind("click");
-}
-
 function onMasterNavigate(oEvent, aParams) {
-    var targetPage = oEvent ? $(oEvent.currentTarget).data('target') : 'welcome';
+    var toPage = oEvent ? $(oEvent.currentTarget).data('target') : 'welcome';
+    var fromPage = currentDetail;
 
-    if (targetPage === currentDetail) return;
+    if (toPage === fromPage) return;
 
-    //bring the page from the right side
-    $('#' + targetPage).removeClass('hidden');
-    setTimeout(
-        () => {
-            $('#' + targetPage).addClass('slidingCenter');
-
-            if (currentDetail){
-                $('#'+currentDetail).addClass('slidingLeft');
-                setTimeout(
-                    ()=>{
-                        $('#'+currentDetail).addClass('hidden');
-                    }, 400
-                )
+    if (fromPage){ //for when initializing app
+        $('#'+fromPage).removeClass('slidingCenter').addClass('slidingLeft');
+        setTimeout(
+            ()=>{
+                $('#'+fromPage).addClass('hidden');
+                $('#'+fromPage).removeClass('slidingLeft');
+                $('#'+fromPage).addClass('slidingRight');
             }
+        ,200);
+    }
 
-            setTimeout(
-                ()=>{
-                    $('.detailPage').removeClass('slidingLeft slidingRight slidingCenter');
-                }
-                ,800);
+    $('#'+toPage).removeClass('hidden');
+    setTimeout(
+        ()=>{
+            $('#'+toPage).removeClass('slidingRight').addClass('slidingCenter');
         }
-        , 0);
+    ,200);
 
-    //slide the current window to the left side
+    currentDetail = toPage;
 }
 
 function onTransitionEndDetail(oEvent) {
-    console.log("ok");
-
-    if ($(oEvent.currentTarget).hasClass('slidingCenter')) {
-        currentDetail = oEvent.currentTarget.id;
-    }
-
-    // $('.detailPage').removeClass('slidingCenter slidingRight slidingLeft');
+    console.log("transition ended");
 }
-
-
