@@ -1,22 +1,30 @@
 <div id="register" class="detailPage slidingRight">
     <header>
-        <div class="bar">
-            <div class="barMiddle">
-                <h4 class="detailPageTitle">Register Page</h4>
-            </div>
-            <div class="barLeft">
+        <div class="d-flex p-1 flex-row justify-content-between bar">
+            <div>
                 <div class="outerBtn" style="cursor:pointer;display:inline-block;margin-right:0.25rem;margin-left:0.25rem;">
                     <div class="btn btn-primary" onclick="toggleMaster(event)" style="color:#346187;background:transparent;border:none;">
                         <span class="fas fa-2x fa-list"></span>
                     </div>
                 </div>
             </div>
+            <div>
+                <h4 class="detailPageTitle">Register Form</h4>
+            </div>
+            <div class="user" style="cursor:pointer" data-container="body" data-toggle="popover" data-placement="bottom">
+                <span>
+                    <img src="./img/ghost.jpg" class="profileGhost">
+                </span>
+                <span class="profile" style="margin:0 0.5rem">Hello, </span>
+                <div class="fa fa-chevron-down" style="margin-right:0.5rem"></div>
+            </div>
+            <div class="notuser"></div>
         </div>
     </header>
 
     <section>
         <div class="p-5">
-            <form id="form_register">
+            <form id="form_register" action="index.html">
                 <formelements>
                     <div class="form-group row justify-content-center">
                         <label for="inputUsername" class="col-sm-2 col-form-label required">Username</label>
@@ -58,7 +66,7 @@
                     </div>
                 </formelements>
 
-                <div class="form-group row justify-content-center" style="font-size:13px;"><span class="required"> </span>  required fields</div>
+                <div class="form-group row justify-content-center" style="font-size:13px;"><span class="required"> </span> required fields</div>
 
                 <div class="form-group row justify-content-center" style="margin-top:2.25rem;">
                     <button type="submit" class="btn btn-primary mb-2 btn-lg col-sm-6 bgYellow">Register!</button>

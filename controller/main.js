@@ -1,8 +1,55 @@
 var currentDetail;
+var bLoggedIn = false;
+var users = {
+    a: 'a'
+};
+
+var oDetailNav = {
+    play: function(data) {
+        if (!window.context) window.context = canvas.getContext('2d');
+    },
+
+    welcome: function(data) {
+
+    },
+    register: function(data) {
+        // init datepicker control in register form
+        $('#dt').datepicker({
+            format: 'dd/mm/yyyy',
+            autoclose: true,
+            locale: 'he'
+        }).on('changeDate',
+            oParameters => {
+                $('#dt').focus().valid();
+        });
+
+        if (!window.oValidator) initFormValidator();
+
+        resetForm();
+    },
+    login: function(data){
+        
+    }
+}
 
 $(() => {
     initApp();
 });
+
+function initApp() {
+    $.get('./view/master.html').done(
+        (data) => {
+            $("#splitApp").append(data);
+            //set welcome page as default - trigger click event on welcome navbutton
+            $('#nav_welcome').trigger($.Event('onclick'));
+        }
+    ).fail(
+        (err) => {
+            showError(err);
+            alert("Couldn't initialize app - master page not loaded");
+        }
+    );
+}
 
 function toggleMaster(oEvent) {
     var oMaster = $('#masterPage');
@@ -24,6 +71,18 @@ function onMasterNavigate(oEvent, aParams) {
             .done(
             (data) => {
                 $("#splitApp").append(data);
+
+                //init popovers
+                $('.user[data-toggle="popover"]').popover({
+                    container: 'body',
+                    content: '<button class="btn btn-danger" onclick="logout(event)">Log Out</button>',
+                    html: true
+                });
+
+                if (bLoggedIn){
+                    $('#'+toPage).find('.user').addClass('notuser').removeClass('user');
+                    $('#'+toPage).find('.notuser').addClass('user').removeClass('notuser');
+                }
 
                 bindDetailEvents(toPage);
 
@@ -64,10 +123,11 @@ function transitionToPage(toPage) {
     }
 
     $('#' + toPage).removeClass('hidden');
-    $(".detailPage:not(#" + toPage + ")").addClass('hidden');
+    
     setTimeout(
         () => {
             $('#' + toPage).removeClass('slidingRight').addClass('slidingCenter');
+            $(".detailPage:not(#" + toPage + ")").addClass('hidden');
         }
         , 400);
 
@@ -80,26 +140,10 @@ function onTransitionEndDetail(oEvent) {
     }
 }
 
-var oDetailNav = {
-    play: function (data) {
-        window.context = canvas.getContext('2d');
-    },
-
-    welcome: function (data) {
-
-    },
-    register: function (data) {
-        // init datepicker control in register form
-        $('#dt').datepicker({
-            format: 'dd/mm/yyyy',
-            autoclose: true,
-            locale: 'he'
-        }).on('changeDate',
-            oParameters => {
-                $('#dt').focus();
-            });
-        initFormValidator();
-    }
+function resetForm(){
+    $('#form_register').get(0).reset();
+    window.oValidator.resetForm();
+    $('.valid').removeClass('valid');
 }
 
 function initFormValidator() {
@@ -147,21 +191,70 @@ function initFormValidator() {
         success: function (element) {
             element.parent().addClass('valid');
             element.parent().removeClass('err');
+        },
+        submitHandler: function(form){
+            console.log("Form submitted");
+
+            if (register(form.username.value, form.password.value)){
+                login(form.username.value, form.password.value);
+            } else {
+                onRegisterError();
+            }
+
+            return false;
         }
     });
 }
 
-function initApp() {
-    $.get('./view/master.html').done(
-        (data) => {
-            $("#splitApp").append(data);
-            //set welcome page as default - trigger click event on welcome navbutton
-            $('#nav_welcome').trigger($.Event('onclick'));
-        }
-    ).fail(
-        (err) => {
-            console.error(err);
-            alert("Couldn't initialize app - master page not loaded");
+function login(id, pw){
+    if (bLoggedIn) {
+        alert("Must log out before log-in");
+        return false;
+    }
+    bLoggedIn = users[id]===pw;
+    toggleUser();
+    $('#nav_welcome').trigger($.Event('onclick'));
+    $('.profile').text("Hello, " + id+"!");
+    
+    return bLoggedIn;
+}
+
+function register(id, pw){
+    if (users[id]){
+        return false;
+    } else {
+        users[id] = pw;
+        return true;
+    }
+}
+
+function toggleUser(bLoggingIn){
+
+    var toHide = bLoggingIn ? $('.notuser') :$('.user');
+    var toShow = bLoggingIn ? $('.user') : $('.notuser');
+
+    toHide.addClass(bLoggingIn ? 'user' : 'notuser').removeClass(bLoggingIn ? 'notuser' : 'user');
+    toShow.removeClass(bLoggingIn ? 'user' : 'notuser').addClass(bLoggingIn ? 'notuser' : 'user');
+
+}
+
+function onRegisterError(sUser){
+    
+}
+
+function logout(oEvent){
+    $('.user[data-toggle="popover"]').popover('hide');
+    toggleUser();
+    bLoggedIn = false;
+    $('#nav_welcome').trigger($.Event('onclick'));
+}
+
+function showError(sMsg){
+    $.get('./view/error.html').done(
+        (data)=>{
+            $('body').append(data);
+            $('#modal').find('.modal-body').text(sMsg);
+            $('#modal').modal('show');
         }
     );
 }
