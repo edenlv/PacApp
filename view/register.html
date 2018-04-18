@@ -1,0 +1,70 @@
+<div id="register" class="detailPage slidingRight">
+    <header>
+        <div class="bar">
+            <div class="barMiddle">
+                <h4 class="detailPageTitle">Register Page</h4>
+            </div>
+            <div class="barLeft">
+                <div class="outerBtn" style="cursor:pointer;display:inline-block;margin-right:0.25rem;margin-left:0.25rem;">
+                    <div class="btn btn-primary" onclick="toggleMaster(event)" style="color:#346187;background:transparent;border:none;">
+                        <span class="fas fa-2x fa-list"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section>
+        <div class="p-5">
+            <form id="form_register">
+                <formelements>
+                    <div class="form-group row justify-content-center">
+                        <label for="inputUsername" class="col-sm-2 col-form-label required">Username</label>
+                        <div class="inputContainer col-sm-4">
+                            <input name="username" type="text" class="form-control" id="inputUsername" placeholder="Username"></input>
+                        </div>
+                    </div>
+
+                    <div class="form-group row justify-content-center">
+                        <label for="inputPassword" class="col-sm-2 col-form-label required">Password</label>
+                        <div class="inputContainer col-sm-4">
+                            <input name="password" type="password" class="form-control" id="inputPassword" placeholder="Password">
+                        </div>
+                    </div>
+                    <div class="form-group row justify-content-center">
+                        <label for="inputEmail" class="col-sm-2 col-form-label required">Email</label>
+                        <div class="inputContainer col-sm-4">
+                            <input name="email" type="email" class="form-control" id="inputEmail" placeholder="Email">
+                        </div>
+                    </div>
+                    <div class="form-group row justify-content-center">
+                        <label for="inputFirstname" class="col-sm-2 col-form-label required">First Name</label>
+                        <div class="inputContainer col-sm-4">
+                            <input name="firstname" type="text" class="form-control" id="inputFirstname" placeholder="First Name">
+                        </div>
+                    </div>
+                    <div class="form-group row justify-content-center">
+                        <label for="inputLastname" class="col-sm-2 col-form-label required">Last Name</label>
+                        <div class="inputContainer col-sm-4">
+                            <input name="lastname" type="text" class="form-control" id="inputLastname" placeholder="Last Name">
+                        </div>
+                    </div>
+                    <div class="form-group row justify-content-center">
+                        <label for="dt" class="col-sm-2 col-form-label required">Date of Birth</label>
+                        <div class="inputContainer col-sm-4">
+                            <input name="birthday" id="dt" data-provide="datepicker" class="form-control" placeholder="Birthday">
+
+                        </div>
+                    </div>
+                </formelements>
+
+                <div class="form-group row justify-content-center" style="font-size:13px;"><span class="required"> </span>  required fields</div>
+
+                <div class="form-group row justify-content-center" style="margin-top:2.25rem;">
+                    <button type="submit" class="btn btn-primary mb-2 btn-lg col-sm-6 bgYellow">Register!</button>
+                </div>
+            </form>
+
+        </div>
+    </section>
+</div>

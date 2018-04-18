@@ -4,8 +4,9 @@
 	<script>
 		FontAwesomeConfig = { searchPseudoElements: true };
 	</script>
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-	 crossorigin="anonymous"></script>
+	<!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+	 crossorigin="anonymous"></script> -->
+	 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
 	 crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
@@ -20,6 +21,7 @@
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
 	<script src="controller/main.js"></script>
+	<script src="game/pacman.js"></script>
 </head>
 
 <body>
@@ -29,140 +31,9 @@
 				<div class="shellContent shellContentBG">
 					<div id="splitApp" class="splitApp">
 
-						<div id="masterPage" class="masterPage masterHidden">
-							<header>
-								<div class="bar">
-									<div class="barMiddle">
-										<h5 class="detailPageTitle">Navigation Pane</h5>
-									</div>
-									<div class="barRight">
-										<div class="outerBtn" style="cursor:pointer;display:inline-block;margin-right:0.25rem;margin-left:0.25rem;">
-											<div class="btn btn-primary" onclick="toggleMaster(event)" style="color:#346187;background:transparent;border:none;">
-												<span class="fas fa-2x fa-angle-left"></span>
-											</div>
-										</div>
-									</div>
-								</div>
-							</header>
-							<section class="pageSection">
-								<ul style="padding:0px;">
-									<li id="nav_welcome" class="navItem outerBtn" onclick="onMasterNavigate(event)" data-target="welcome">
-										<div class="navItemContent">
-											Welcome Page
-										</div>
-										<span class="fas fa-chevron-right"></span>
-									</li>
-									<li id="nav_login" class="navItem outerBtn" onclick="onMasterNavigate(event)" data-target="login">
-										<div class="navItemContent">
-											Login
-										</div>
-										<span class="fas fa-chevron-right"></span>
-									</li>
-									<li id="nav_register" class="navItem outerBtn" onclick="onMasterNavigate(event)" data-target="register">
-										<div class="navItemContent">
-											Register
-										</div>
-										<span class="fas fa-chevron-right"></span>
-									</li>
-									<li id="nav_play" class="navItem outerBtn" onclick="onMasterNavigate(event)" data-target="play">
-										<div class="navItemContent">
-											Play Pacman!
-										</div>
-										<span class="fas fa-chevron-right"></span>
-									</li>
-									<li id="nav_about" class="navItem outerBtn">
-										<div class="navItemContent">
-											About
-										</div>
-									</li>
-								</ul>
-							</section>
-						</div>
+						<!-- MASTER PAGE -->
 
-						<div id="welcome" class="detailPage slidingRight">
-							<header>
-								<div class="bar">
-									<div class="barMiddle">
-										<h4 class="detailPageTitle">Welcome to the Pacman App!</h4>
-									</div>
-									<div class="barLeft">
-										<div class="outerBtn" style="cursor:pointer;display:inline-block;margin-right:0.25rem;margin-left:0.25rem;">
-											<div class="btn btn-primary" onclick="toggleMaster(event)" style="color:#346187;background:transparent;border:none;">
-												<span class="fas fa-2x fa-list"></span>
-											</div>
-										</div>
-									</div>
-								</div>
-							</header>
-						</div>
-
-						<div id="register" class="detailPage slidingRight">
-							<header>
-								<div class="bar">
-									<div class="barMiddle">
-										<h4 class="detailPageTitle">Register Page</h4>
-									</div>
-									<div class="barLeft">
-										<div class="outerBtn" style="cursor:pointer;display:inline-block;margin-right:0.25rem;margin-left:0.25rem;">
-											<div class="btn btn-primary" onclick="toggleMaster(event)" style="color:#346187;background:transparent;border:none;">
-												<span class="fas fa-2x fa-list"></span>
-											</div>
-										</div>
-									</div>
-								</div>
-							</header>
-
-							<section>
-								<div class="p-5">
-									<form id="form_register">
-										<formelements>
-										<div class="form-group row justify-content-center">
-											<label for="inputUsername" class="col-sm-2 col-form-label">Username</label>
-											<div class="inputContainer col-sm-4">
-												<input name="username" type="text" class="form-control" id="inputUsername" placeholder="Username"></input>
-											</div>
-										</div>
-
-										<div class="form-group row justify-content-center">
-											<label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
-											<div class="inputContainer col-sm-4">
-												<input name="password" type="password" class="form-control" id="inputPassword" placeholder="Password">
-											</div>
-										</div>
-										<div class="form-group row justify-content-center">
-											<label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
-											<div class="inputContainer col-sm-4">
-												<input name="email" type="email" class="form-control" id="inputEmail" placeholder="Email">
-											</div>
-										</div>
-										<div class="form-group row justify-content-center">
-											<label for="inputFirstname" class="col-sm-2 col-form-label">First Name</label>
-											<div class="inputContainer col-sm-4">
-												<input name="firstname" type="text" class="form-control" id="inputFirstname" placeholder="First Name">
-											</div>
-										</div>
-										<div class="form-group row justify-content-center">
-											<label for="inputLastname" class="col-sm-2 col-form-label">Last Name</label>
-											<div class="inputContainer col-sm-4">
-												<input name="lastname" type="text" class="form-control" id="inputLastname" placeholder="Last Name">
-											</div>
-										</div>
-										<div class="form-group row justify-content-center">
-											<label for="" class="col-sm-2 col-form-label">Date of Birth</label>
-											<div class="inputContainer col-sm-4">
-												<input name="birthday" id="dt" data-provide="datepicker" class="form-control">
-											</div>
-										</div>
-										</formelements>
-
-										<div class="form-group row justify-content-center" style="margin-top:2.25rem;">
-											<button type="submit" class="btn btn-primary mb-2 btn-lg col-sm-6">Register!</button>
-										</div>
-									</form>
-
-								</div>
-							</section>
-						</div>
+						<!-- DETAIL PAGES GO HERE -->
 
 					</div>
 				</div>

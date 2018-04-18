@@ -1,0 +1,49 @@
+<div id="masterPage" class="masterPage masterHidden">
+    <header>
+        <div class="bar">
+            <div class="barMiddle">
+                <h5 class="detailPageTitle">Navigation Pane</h5>
+            </div>
+            <div class="barRight">
+                <div class="outerBtn" style="cursor:pointer;display:inline-block;margin-right:0.25rem;margin-left:0.25rem;">
+                    <div class="btn btn-primary" onclick="toggleMaster(event)" style="color:#346187;background:transparent;border:none;">
+                        <span class="fas fa-2x fa-angle-left"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <section class="pageSection">
+        <ul style="padding:0px;">
+            <li id="nav_welcome" class="navItem outerBtn" onclick="onMasterNavigate(event)" data-target="welcome">
+                <div class="navItemContent">
+                    Welcome Page
+                </div>
+                <span class="fas fa-chevron-right"></span>
+            </li>
+            <li id="nav_login" class="navItem outerBtn" onclick="onMasterNavigate(event)" data-target="login">
+                <div class="navItemContent">
+                    Login
+                </div>
+                <span class="fas fa-chevron-right"></span>
+            </li>
+            <li id="nav_register" class="navItem outerBtn" onclick="onMasterNavigate(event)" data-target="register">
+                <div class="navItemContent">
+                    Register
+                </div>
+                <span class="fas fa-chevron-right"></span>
+            </li>
+            <li id="nav_play" class="navItem outerBtn" onclick="onMasterNavigate(event)" data-target="play">
+                <div class="navItemContent">
+                    Play Pacman!
+                </div>
+                <span class="fas fa-chevron-right"></span>
+            </li>
+            <li id="nav_about" class="navItem outerBtn">
+                <div class="navItemContent">
+                    About
+                </div>
+            </li>
+        </ul>
+    </section>
+</div>

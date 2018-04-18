@@ -1,0 +1,26 @@
+<div id="welcome" class="detailPage slidingRight">
+    <header>
+        <div class="bar">
+            <div class="barMiddle">
+                <h4 class="detailPageTitle">Welcome to the Pacman App!</h4>
+            </div>
+            <div class="barLeft">
+                <div class="outerBtn" style="cursor:pointer;display:inline-block;margin-right:0.25rem;margin-left:0.25rem;">
+                    <div class="btn btn-primary" onclick="toggleMaster(event)" style="color:#346187;background:transparent;border:none;">
+                        <span class="fas fa-2x fa-list"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <section>
+
+        <div class="pacBG"></div>
+        <div class="container" style="height:50%;">
+            <div class="d-flex justify-content-center align-items-center" style="height:100%;">
+                <button class="btn welcomeBtn" data-target="register" onclick="onMasterNavigate(event)">Register</button>
+                <button class="btn welcomeBtn" data-target="login" onclick="onMasterNavigate(event)">Login</button>
+            </div>
+        </div>
+    </section>
+</div>

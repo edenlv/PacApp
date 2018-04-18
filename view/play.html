@@ -1,0 +1,26 @@
+<div id="play" class="detailPage slidingRight">
+        <header>
+                <div class="bar">
+                    <div class="barMiddle">
+                        <h4 class="detailPageTitle">Play Pacman!</h4>
+                    </div>
+                    <div class="barLeft">
+                        <div class="outerBtn" style="cursor:pointer;display:inline-block;margin-right:0.25rem;margin-left:0.25rem;">
+                            <div class="btn btn-primary" onclick="toggleMaster(event)" style="color:#346187;background:transparent;border:none;">
+                                <span class="fas fa-2x fa-list"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <section>
+                <button class="btn btn-primary mb-2 btn-lg" onclick="Start()">Start!</button>
+    SCORE:
+    <input id="lblScore" type="text" />
+    <br/>
+    TIME:
+    <input id="lblTime" type="text" />
+    <br/>
+    <canvas id="canvas" height="600" width="600"></canvas>
+    </section>
+</div>
