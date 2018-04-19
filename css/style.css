@@ -345,10 +345,26 @@ header>.bar{
 }
 
 .footerInner{
-    background: #fcf969;
+    background: #e5eaef;
     box-shadow: 0 0 24px rgba(0, 0, 0, 1);
     height:100%;
     margin: auto;
     width: 95%;
     border-radius: 0.5rem;
+}
+
+.paci2{
+    position: absolute;
+    float: right;
+    top: -50px;
+    right: -415px;
+    width: 400px;
+}
+
+.paci{
+    position: absolute;
+    float: left;
+    height: 400px;
+    top: -100px;
+    right: 500px;
 }

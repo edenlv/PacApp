@@ -1,18 +1,21 @@
 var currentDetail;
 var bLoggedIn = false;
-var users = {
-    a: 'a'
-};
+var currentUser;
 
-var oDetailNav = {
-    play: function(data) {
+$(() => {
+    initApp();
+});
+
+var oDetailNav = { //fires after transitionend of detail page
+    play: function (data) {
         if (!window.context) window.context = canvas.getContext('2d');
     },
 
-    welcome: function(data) {
+    welcome: function (data) {
 
     },
-    register: function(data) {
+
+    register: function (data) {
         // init datepicker control in register form
         $('#dt').datepicker({
             format: 'dd/mm/yyyy',
@@ -21,20 +24,50 @@ var oDetailNav = {
         }).on('changeDate',
             oParameters => {
                 $('#dt').focus().valid();
-        });
+            });
 
-        if (!window.oValidator) initFormValidator();
+        if (!Model.validators['register']) Model.initFormValidator();
 
-        resetForm();
+        resetForm('register');
     },
-    login: function(data){
-        
+
+    login: function (data) {
+        if (!Model.validators['login']) Model.initLoginForm();
+        resetForm('login');
     }
 }
 
-$(() => {
-    initApp();
-});
+function loadDetailPage(toPage) {
+    $.get('./view/' + toPage + '.html')
+        .done(
+        (data) => {
+            $("#splitApp").append(data);
+
+            //init popovers
+            $('.user[data-toggle="popover"]').popover({
+                container: '#' + toPage,
+                content: '<button class="btn btn-danger" onclick="Model.logout(event)">Log Out</button>',
+                html: true
+            });
+
+            if (bLoggedIn) {
+                var aux1 = $('#' + toPage).find('.user');
+                var aux2 = $('#' + toPage).find('.notuser');
+
+                aux1.addClass('notuser').removeClass('user');
+                aux2.addClass('user').removeClass('notuser');
+                $('#' + toPage).find('.profile').text("Hello, " + currentUser + "!");
+            }
+
+            bindDetailEvents(toPage);
+
+            transitionToPage(toPage);
+        }).fail(
+        (data) => {
+            showError("404 - Page not found.");
+        }
+        );
+}
 
 function initApp() {
     $.get('./view/master.html').done(
@@ -48,7 +81,7 @@ function initApp() {
             showError(err);
             alert("Couldn't initialize app - master page not loaded");
         }
-    );
+        );
 }
 
 function toggleMaster(oEvent) {
@@ -64,38 +97,43 @@ function onMasterNavigate(oEvent, aParams) {
     var toPage = oEvent ? $(oEvent.currentTarget).data('target') : 'welcome';
     var fromPage = currentDetail;
 
-    if (toPage === fromPage) return;
 
-    if (!$("#splitApp").find("#" + toPage).get().length) {
-        $.get('./view/' + toPage + '.html')
-            .done(
-            (data) => {
-                $("#splitApp").append(data);
+    onBeforeNavigate(oEvent, toPage);
+    if (!oEvent || !oEvent.defaultPrevented) {//first initApp() trigger does not pass event param - ignore
+        if (toPage === fromPage) return;
 
-                //init popovers
-                $('.user[data-toggle="popover"]').popover({
-                    container: 'body',
-                    content: '<button class="btn btn-danger" onclick="logout(event)">Log Out</button>',
-                    html: true
-                });
+        if (!$("#splitApp").find("#" + toPage).get().length) {
+            loadDetailPage(toPage);
+        } else {
+            transitionToPage(toPage);
+        }
+    }
 
-                if (bLoggedIn){
-                    $('#'+toPage).find('.user').addClass('notuser').removeClass('user');
-                    $('#'+toPage).find('.notuser').addClass('user').removeClass('notuser');
-                }
+}
 
-                bindDetailEvents(toPage);
-
-                transitionToPage(toPage);
-            }).fail(
-            (data) => {
-                alert("404 - Page not found.");
+function onBeforeNavigate(oEvent, toPage) {
+    switch (toPage) {
+        case 'play': {
+            if (!bLoggedIn) {
+                showError("You must log in before playing!");
+                oEvent.stopPropagation();
+                oEvent.preventDefault();
             }
-            );
-    } else {
-        transitionToPage(toPage);
+
+            break;
+        }
+        case 'login': {
+            if (bLoggedIn) {
+                showError("You are already logged in! Log out before logging back in :)");
+                oEvent.stopPropagation();
+                oEvent.preventDefault();
+            }
+
+            break;
+        }
     }
 }
+
 
 function bindDetailEvents(toPage) {
     $('#' + toPage).bind("transitionend", //only fires for display !== none
@@ -123,7 +161,7 @@ function transitionToPage(toPage) {
     }
 
     $('#' + toPage).removeClass('hidden');
-    
+
     setTimeout(
         () => {
             $('#' + toPage).removeClass('slidingRight').addClass('slidingCenter');
@@ -140,97 +178,21 @@ function onTransitionEndDetail(oEvent) {
     }
 }
 
-function resetForm(){
-    $('#form_register').get(0).reset();
-    window.oValidator.resetForm();
+function resetForm(sId) {
+    $('#form_' + sId).get(0).reset();
+    Model.validators[sId].resetForm();
     $('.valid').removeClass('valid');
 }
 
-function initFormValidator() {
-    $.validator.addMethod("lettersonly", (value, element) => {
-        return /^[a-zA-Z]+$/i.test(value);
-    }, "Name must contain alphabetical letters only.");
-
-    $.validator.addMethod("alphanumeric", (value, element) => {
-        return /^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$/.test(value);
-    }, "Password must contain letters AND numbers.");
-
-
-    window.oValidator = $('#form_register').validate({
-        rules: {
-            username: {
-                minlength: 2,
-                required: true
-            },
-            password: {
-                required: true,
-                minlength: 8,
-                alphanumeric: true
-            },
-            email: {
-                required: true,
-                email: true
-            },
-            firstname: {
-                required: true,
-                lettersonly: true
-            },
-            lastname: {
-                required: true,
-                lettersonly: true
-            },
-            birthday: {
-                required: true
-            }
-
-        },
-        highlight: function (element) {
-            console.log("highlighting");
-            $(element).parent().addClass('err').removeClass('valid');
-        },
-        success: function (element) {
-            element.parent().addClass('valid');
-            element.parent().removeClass('err');
-        },
-        submitHandler: function(form){
-            console.log("Form submitted");
-
-            if (register(form.username.value, form.password.value)){
-                login(form.username.value, form.password.value);
-            } else {
-                onRegisterError();
-            }
-
-            return false;
-        }
-    });
-}
-
-function login(id, pw){
-    if (bLoggedIn) {
-        alert("Must log out before log-in");
-        return false;
-    }
-    bLoggedIn = users[id]===pw;
+function onLoginSuccess() {
     toggleUser();
     $('#nav_welcome').trigger($.Event('onclick'));
-    $('.profile').text("Hello, " + id+"!");
-    
-    return bLoggedIn;
+    $('.profile').text("Hello, " + currentUser + "!");
 }
 
-function register(id, pw){
-    if (users[id]){
-        return false;
-    } else {
-        users[id] = pw;
-        return true;
-    }
-}
+function toggleUser(bLoggingIn) {
 
-function toggleUser(bLoggingIn){
-
-    var toHide = bLoggingIn ? $('.notuser') :$('.user');
+    var toHide = bLoggingIn ? $('.notuser') : $('.user');
     var toShow = bLoggingIn ? $('.user') : $('.notuser');
 
     toHide.addClass(bLoggingIn ? 'user' : 'notuser').removeClass(bLoggingIn ? 'notuser' : 'user');
@@ -238,23 +200,40 @@ function toggleUser(bLoggingIn){
 
 }
 
-function onRegisterError(sUser){
-    
+function onRegisterError(sUser) {
+
 }
 
-function logout(oEvent){
-    $('.user[data-toggle="popover"]').popover('hide');
+function onLogout(oEvent) {
     toggleUser();
-    bLoggedIn = false;
     $('#nav_welcome').trigger($.Event('onclick'));
+    $('.user[data-toggle="popover"]').popover('hide');
 }
 
-function showError(sMsg){
-    $.get('./view/error.html').done(
-        (data)=>{
-            $('body').append(data);
-            $('#modal').find('.modal-body').text(sMsg);
-            $('#modal').modal('show');
-        }
-    );
+function showError(sMsg) {
+    if (!$('#modal').length) {
+        $.get('./view/error.html').done(
+            (data) => {
+                $('body').append(data);
+                $('#modal').find('.modal-body').text(sMsg);
+                $('#modal').modal('show');
+            }
+        );
+    } else {
+        $('#modal').find('.modal-body').text(sMsg);
+        $('#modal').modal('show');
+    }
+}
+
+function showAbout() {
+    if (!$('#aboutmodal').length) {
+        $.get('./view/about.html').done(
+            (data) => {
+                $('body').append(data);
+                $('#aboutmodal').modal('show');
+            }
+        );
+    } else {
+        $('#aboutmodal').modal('show');
+    }
 }
