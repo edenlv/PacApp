@@ -26,13 +26,12 @@ var oDetailNav = { //fires after transitionend of detail page
                 $('#dt').focus().valid();
             });
 
-        if (!Model.validators['register']) Model.initFormValidator();
-
+        Model.initFormValidator();
         resetForm('register');
     },
 
     login: function (data) {
-        if (!Model.validators['login']) Model.initLoginForm();
+        Model.initLoginForm();
         resetForm('login');
     }
 }
