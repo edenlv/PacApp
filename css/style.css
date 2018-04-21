@@ -402,5 +402,5 @@ header>.bar{
 }
 
 .bgLightred{
-    background: #ff9f9f;
+    background: #ff9f9f!important;
 }
