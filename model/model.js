@@ -9,7 +9,7 @@
             $.validator.addMethod("lettersonly", (value, element) => {
                 return /^[a-zA-Z]+$/i.test(value);
             }, "Name must contain alphabetical letters only.");
-        
+
             $.validator.addMethod("alphanumeric", (value, element) => {
                 return /^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$/.test(value);
             }, "Password must contain letters AND numbers.");
@@ -101,34 +101,67 @@
         },
 
         initLoginForm: function () {
-            this.validators['login'] = $('#form_login').validate({
-                rules: {
-                    username: {
-                        minlength: 1,
-                        required: true
+            if (!this.validators['login']) {
+                this.validators['login'] = $('#form_login').validate({
+                    rules: {
+                        username: {
+                            minlength: 1,
+                            required: true
+                        },
+                        password: {
+                            required: true,
+                            minlength: 1
+                        }
                     },
-                    password: {
-                        required: true,
-                        minlength: 1
-                    }
-                },
-                highlight: function (element) {
-                    $(element).parent().addClass('err').removeClass('valid');
-                },
-                success: function (element) {
-                    element.parent().addClass('valid');
-                    element.parent().removeClass('err');
-                },
-                submitHandler: function (form) {
-                    console.log("Form submitted");
+                    highlight: function (element) {
+                        $(element).parent().addClass('err').removeClass('valid');
+                    },
+                    success: function (element) {
+                        element.parent().addClass('valid');
+                        element.parent().removeClass('err');
+                    },
+                    submitHandler: function (form) {
+                        console.log("Form submitted");
 
-                    if (Model.login(form.username.value, form.password.value)) {
-                        onLoginSuccess();
-                    }
+                        if (Model.login(form.username.value, form.password.value)) {
+                            onLoginSuccess();
+                        }
 
-                    return false;
-                }
-            });
+                        return false;
+                    }
+                });
+            }
+        },
+
+        initSettingsForm: function () {
+            if (!this.validators['settings']) {
+                this.validators['settings'] = $('#form_settings').validate({
+                    rules: {
+                        ballnum:{
+                            required: true,
+                            range: [50,90]
+                        },
+                        time: {
+                            required: true,
+                            range: [60,Number.POSITIVE_INFINITY]
+                        },
+                    },
+                    highlight: function (element) {
+                        $(element).parent().addClass('err').removeClass('valid');
+                    },
+                    success: function (element) {
+                        element.parent().addClass('valid');
+                        element.parent().removeClass('err');
+                    },
+                    submitHandler: function(form){
+                        numOfBalls = form.ballnum.value;
+                        sumOfTime = form.time.value * 1000;
+                        numOfMonsters = form.gridRadios.value;
+                        setup();
+                        $('#settingsmodal').modal('hide');
+                    }
+                });
+            }
         }
 
 

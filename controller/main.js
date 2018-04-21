@@ -6,9 +6,23 @@ $(() => {
     initApp();
 });
 
+function initApp() {
+    $.get('./view/master.html').done(
+        (data) => {
+            $("#splitApp").append(data);
+            //set welcome page as default - trigger click event on welcome navbutton
+            $('#nav_welcome').trigger($.Event('onclick'));
+        }
+    ).fail(
+        (err) => {
+            showError("Couldn't initialize app - master page not loaded");
+        }
+        );
+}
+
 var oDetailNav = { //fires after transitionend of detail page
     play: function (data) {
-        if (!window.context) window.context = canvas.getContext('2d');
+        setup();
     },
 
     welcome: function (data) {
@@ -33,6 +47,12 @@ var oDetailNav = { //fires after transitionend of detail page
     login: function (data) {
         Model.initLoginForm();
         resetForm('login');
+    },
+
+    default: function (data) {
+        if (currentDetail !== 'play') {
+            exitGame();
+        }
     }
 }
 
@@ -68,20 +88,7 @@ function loadDetailPage(toPage) {
         );
 }
 
-function initApp() {
-    $.get('./view/master.html').done(
-        (data) => {
-            $("#splitApp").append(data);
-            //set welcome page as default - trigger click event on welcome navbutton
-            $('#nav_welcome').trigger($.Event('onclick'));
-        }
-    ).fail(
-        (err) => {
-            showError(err);
-            alert("Couldn't initialize app - master page not loaded");
-        }
-        );
-}
+
 
 function toggleMaster(oEvent) {
     var oMaster = $('#masterPage');
@@ -96,8 +103,8 @@ function onMasterNavigate(oEvent, aParams) {
     var toPage = oEvent ? $(oEvent.currentTarget).data('target') : 'welcome';
     var fromPage = currentDetail;
 
-
     onBeforeNavigate(oEvent, toPage);
+
     if (!oEvent || !oEvent.defaultPrevented) {//first initApp() trigger does not pass event param - ignore
         if (toPage === fromPage) return;
 
@@ -174,6 +181,7 @@ function transitionToPage(toPage) {
 function onTransitionEndDetail(oEvent) {
     if ($(oEvent.target).hasClass('detailPage') > 0) {
         oDetailNav[oEvent.target.id]();
+        oDetailNav['default']();
     }
 }
 
@@ -200,7 +208,7 @@ function toggleUser(bLoggingIn) {
 }
 
 function onRegisterError(sUser) {
-
+    showError('There was a problem in your registration.');
 }
 
 function onLogout(oEvent) {
@@ -234,5 +242,52 @@ function showAbout() {
         );
     } else {
         $('#aboutmodal').modal('show');
+    }
+}
+
+function toggleSound(oEvent) {
+    $('#volume .btn').toggle();
+    $('#volume .btn').each(
+        (idx, element) => {
+            if (element.style.display == 'none') {
+                audio.muted = $(element).data('sound');
+            }
+        }
+    );
+}
+
+function onPressOpenSettings() {
+    if (!$('#settingsmodal').length) {
+        $.get('./view/settings.html').done(
+            (data) => {
+                $('body').append(data);
+                $('#settingsmodal').modal('show');
+
+                //validate form
+                Model.initSettingsForm();
+
+                $('#form_settings [name="ballnum"]').val(numOfBalls);
+                $('#form_settings [name="time"]').val(sumOfTime/1000);
+                $('#form_settings [name="gridRadios"]').each(
+                    (idx, input) => {
+                        if (idx+1==numOfMonsters){
+                            $(input).prop('checked',true);
+                        }
+                    }
+                );
+            }
+        );
+    } else {
+        $('#form_settings [name="ballnum"]').val(numOfBalls);
+        $('#form_settings [name="time"]').val(sumOfTime/1000);
+        $('#form_settings [name="gridRadios"]').each(
+            (idx, input) => {
+                if (idx+1==numOfMonsters){
+                    $(input).prop('checked',true);
+                }
+            }
+        );
+        $('#settingsmodal').modal('show');
+        
     }
 }

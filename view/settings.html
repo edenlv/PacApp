@@ -1,0 +1,57 @@
+<div class="modal fade" id="settingsmodal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><span class="fa fa-cog" style="color:#009bda;margin:0 1rem;"></span>Settings</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+            </div>
+            <div class="modal-body">
+                <form id="form_settings">
+                    <div class="form-group row">
+                        <label for="inputEmail3" class="col-sm-4 col-form-label">Number of balls:</label>
+                        <div class="col-sm-8">
+                            <input type="number" name="ballnum" class="form-control" id="inputEmail3" placeholder="Number of balls...">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="inputPassword3" class="col-sm-4 col-form-label">Total time:</label>
+                        <div class="col-sm-8">
+                            <input type="number" name="time" class="form-control" id="inputPassword3" placeholder="Time in seconds..." >
+                        </div>
+                    </div>
+                    <fieldset class="form-group">
+                        <div class="row">
+                            <legend class="col-form-label col-sm-4 pt-0">Monsters:</legend>
+                            <div class="col-sm-8">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="1" checked>
+                                    <label class="form-check-label" for="gridRadios1">
+                                        1
+                                      </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="2">
+                                    <label class="form-check-label" for="gridRadios2">
+                                       2
+                                      </label>
+                                </div>
+                                <div class="form-check disabled">
+                                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="3">
+                                    <label class="form-check-label" for="gridRadios3">
+                                        3
+                                      </label>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-success" form="form_settings">Save Settings</button>
+            </div>
+        </div>
+    </div>
+</div>

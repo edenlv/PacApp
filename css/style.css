@@ -10,7 +10,7 @@
     top: 0;
     bottom: 0;
     left: 0;
-    opacity: 0.8;
+    opacity: 0.85;
     z-index: -5;
 }
 
@@ -377,4 +377,26 @@ header>.bar{
     height: 400px;
     top: -100px;
     right: 500px;
+}
+
+.canvasContainer{
+    box-shadow: 0 0 40px rgba(0,0,0,0.5);
+}
+
+.d-hidden{
+    display:none!important;
+}
+
+.paci3{
+    position: absolute;
+    width: 150px;
+    right: 50px;
+    top: 80px;
+}
+
+.paci4{
+    position: absolute;
+    width: 150px;
+    left: 50px;
+    top: 55px;
 }

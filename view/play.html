@@ -1,34 +1,86 @@
 <div id="play" class="detailPage slidingRight">
-        <header>
-                <div class="d-flex p-1 flex-row justify-content-between align-items-center bar">
-                    <div>
-                        <div class="outerBtn" style="cursor:pointer;display:inline-block;margin-right:0.25rem;margin-left:0.25rem;">
-                            <div class="btn btn-primary" onclick="toggleMaster(event)" style="color:#346187;background:transparent;border:none;">
-                                <span class="fas fa-2x fa-list"></span>
-                            </div>
-                        </div>
+    <header>
+        <div class="d-flex p-1 flex-row justify-content-between align-items-center bar">
+            <div>
+                <div class="outerBtn" style="cursor:pointer;display:inline-block;margin-right:0.25rem;margin-left:0.25rem;">
+                    <div class="btn btn-primary" onclick="toggleMaster(event)" style="color:#346187;background:transparent;border:none;">
+                        <span class="fas fa-2x fa-list"></span>
                     </div>
-                    <div class="absolute-center">
-                        <h4 class="detailPageTitle">Play Pacman</h4>
-                    </div>
-                    <div class="user" style="cursor:pointer" data-container="body" data-toggle="popover" data-placement="bottom">
-                        <span>
+                </div>
+            </div>
+            <div class="absolute-center">
+                <h4 class="detailPageTitle">Play Pacman</h4>
+            </div>
+            <div class="user" style="cursor:pointer" data-container="body" data-toggle="popover" data-placement="bottom">
+                <span>
                             <img src="./img/ghost.jpg" class="profileGhost">
                         </span>
-                        <span class="profile" style="margin:0 0.5rem">Hello, </span>
-                        <div class="fa fa-chevron-down" style="margin-right:0.5rem"></div>
-                    </div>
-                    <div class="notuser" style="width:64px;"></div>
+                <span class="profile" style="margin:0 0.5rem">Hello, </span>
+                <div class="fa fa-chevron-down" style="margin-right:0.5rem"></div>
+            </div>
+            <div class="notuser" style="width:64px;"></div>
+        </div>
+    </header>
+    <section>
+
+        <div class="gameContainer">
+            <div class="form-row justify-content-center">
+                <div class="form-group col-md-2 m-2">
+                    <label for="lblTime">Time (seconds)</label>
+                    <input class="form-control" id="lblTime" type="text" disabled="true" />
                 </div>
-            </header>
-            <section>
-                <button class="btn btn-primary mb-2 btn-lg" onclick="Start()">Start!</button>
-    SCORE:
-    <input id="lblScore" type="text" />
-    <br/>
-    TIME:
-    <input id="lblTime" type="text" />
-    <br/>
-    <canvas id="canvas" height="600" width="600"></canvas>
+                <div class="form-group col-md-2 m-2">
+                    <label for="lblScore">Score</label>
+                    <input class="form-control" id="lblScore" type="text" disabled="true" />
+                </div>
+
+                <div class="form-group col-md-1 m-2">
+                    <label for="lblLives">Lives</label>
+                    <div id="lblLives" class="d-flex justify-content-start">
+                        <img id="heart3" class="heartsImages" src="img/heart.png" height="40" style="visibility: hidden" />
+                        <img id="heart2" class="heartsImages" src="img/heart.png" height="40" style="visibility: hidden" />
+                        <img id="heart1" class="heartsImages" src="img/heart.png" height="40" style="visibility: hidden" />
+                    </div>
+                </div>
+
+                <div class="form-group col-md-1 m-2">
+                    <label for="volume" style="width:100%" class="text-center">Toggle Sound</label>
+                    <div id="volume" class="d-flex justify-content-center">
+
+                        <button type="button" class="btn btn-lg btn-primary" style="background:#00aeef" onclick="toggleSound(event)" data-toggle="button" aria-pressed="false" data-sound="true">
+                            <i class="fas fa-volume-up" style="color:white"></i>
+                        </button>
+
+                        <button type="button" class="btn btn-lg btn-default" onclick="toggleSound(event)" data-toggle="button" aria-pressed="false" style="display:none;" data-sound="false">
+                            <i class="fas fa-volume-off"></i>
+                        </button>
+
+                    </div>
+                </div>
+
+                <div class="form-group col-md-1 m-2">
+                    <label for="settings" style="width:100%" class="text-center">Settings</label>
+                    <div id="settings" class="d-flex justify-content-center">
+                        <button type="button" class="btn btn-lg btn-default" onclick="onPressOpenSettings()">
+                            <i class="fas fa-cogs" ></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-center mb-4 mt-4">
+            <button id="startButton" type="button" class="btn btn-primary bgYellow" onclick="newGame()" style="width:250px">Start Game</button>
+        </div>
+
+        <div class="d-flex justify-content-center">
+            <img src="./img/paci.png" class="paci4">
+            <div class="canvasContainer">
+                <img id="alterCanvas" src="img/gameBG.jpg" width="800px" height="400px">
+                <canvas id="canvas" width="800" height="400" class="d-hidden"></canvas>
+            </div>
+            <img src="./img/paci2.png" class="paci3">
+        </div>
+
     </section>
 </div>
