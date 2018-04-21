@@ -400,3 +400,7 @@ header>.bar{
     left: 50px;
     top: 55px;
 }
+
+.bgLightred{
+    background: #ff9f9f;
+}

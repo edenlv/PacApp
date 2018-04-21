@@ -8,7 +8,6 @@ var timeThen;
 var wall;
 var bitCoin;
 var hearts;
-var numOfMonsters;
 var fiveBall;
 var fifteenBall;
 var twentyfiveBall;
@@ -33,11 +32,13 @@ var monster1;
 var monster2;
 var monster3;
 var monsterPicCount;
-var numOfBalls;
-var sumOfTime;
 var timeout;
 var intervalCounter;
 var audio;
+
+var numOfBalls = "50";
+var sumOfTime = "60" * 1000;
+var numOfMonsters = "1";
 
 
 function setup()
@@ -46,11 +47,6 @@ function setup()
     window.clearTimeout(timeout);
     canvas = document.getElementById("canvas");
     context = canvas.getContext("2d");
-
-
-    numOfBalls = "50";
-    sumOfTime = "60" * 1000;
-    numOfMonsters = "1";
 
     pacmanFaceShape = 0;
     pacmanDirection = 0;

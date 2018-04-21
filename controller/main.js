@@ -261,33 +261,31 @@ function onPressOpenSettings() {
         $.get('./view/settings.html').done(
             (data) => {
                 $('body').append(data);
-                $('#settingsmodal').modal('show');
 
                 //validate form
                 Model.initSettingsForm();
 
-                $('#form_settings [name="ballnum"]').val(numOfBalls);
-                $('#form_settings [name="time"]').val(sumOfTime/1000);
-                $('#form_settings [name="gridRadios"]').each(
-                    (idx, input) => {
-                        if (idx+1==numOfMonsters){
-                            $(input).prop('checked',true);
-                        }
-                    }
-                );
+                onAfterOpenSettings();
             }
         );
     } else {
-        $('#form_settings [name="ballnum"]').val(numOfBalls);
-        $('#form_settings [name="time"]').val(sumOfTime/1000);
-        $('#form_settings [name="gridRadios"]').each(
-            (idx, input) => {
-                if (idx+1==numOfMonsters){
-                    $(input).prop('checked',true);
-                }
-            }
-        );
-        $('#settingsmodal').modal('show');
         
+        onAfterOpenSettings();
     }
+
+    
+}
+
+function onAfterOpenSettings(){
+    resetForm('settings');
+    $('#form_settings [name="ballnum"]').val(numOfBalls);
+    $('#form_settings [name="time"]').val(sumOfTime/1000);
+    $('#form_settings [name="gridRadios"]').each(
+        (idx, input) => {
+            if (idx+1==numOfMonsters){
+                $(input).prop('checked',true);
+            }
+        }
+    );
+    $('#settingsmodal').modal('show');
 }
