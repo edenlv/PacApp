@@ -87,6 +87,7 @@ function setup()
 
     monstersInitialPositions = [[0,0],[19,0],[0,9],[19,9]];
 
+    monstersArray = [];
 
     for(var i = 0; i < numOfMonsters; i++)
     {
