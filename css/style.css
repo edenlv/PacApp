@@ -408,11 +408,15 @@ header>.bar{
 .showFooterBtn{
     position: absolute;
     margin: auto;
-    bottom: -3px;
+    bottom: 0px;
     left: 50%;
+    
 }
 
 .showFooterBtn .btn{
     border-top-left-radius: 50%;
     border-top-right-radius: 50%;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    height: 25px;
 }
