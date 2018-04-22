@@ -289,3 +289,13 @@ function onAfterOpenSettings(){
     );
     $('#settingsmodal').modal('show');
 }
+
+function onHideAppFooter(){
+    $('.footer').hide('slow');
+    $('#showFooter').show('slow');
+}
+
+function onShowAppFooter(){
+    $('.footer').show('slow');
+    $('#showFooter').hide('slow');
+}

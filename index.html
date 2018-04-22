@@ -19,7 +19,8 @@
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.0/moment.min.js"></script>
 	<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
-	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"
+	/>
 	<script src="model/model.js"></script>
 	<script src="controller/main.js"></script>
 	<script src="game/pacman.js"></script>
@@ -37,16 +38,29 @@
 						<!-- DETAIL PAGES GO HERE -->
 
 						<footer class="footer shellCentralBox">
-							<div class="d-flex justify-content-center footerInner">
+
+							<div class="d-flex justify-content-between align-items-center footerInner">
+								<div class="dummy"></div>
 								<span style="line-height:3rem">PacApp by Eden &amp; Yakov. Built using jQuery, Bootstrap and a few plugins. Contact us at bgu.everything4rent@gmail.com</span>
+								<div style="line-height:3rem" class="mr-4">
+									<button class="btn btn-primary" onclick="onHideAppFooter()">Hide</button>
+								</div>
 							</div>
+
 						</footer>
+
 					</div>
+
 				</div>
 			</div>
 		</div>
 	</div>
 
+	<div id="showFooter" class="showFooterBtn" style="display:none">
+		<button type="button" class="btn btn-primary" onclick="onShowAppFooter()">
+			<i class="fas fa-chevron-up" style="color:white"></i>
+		</button>
+	</div>
 
 
 
